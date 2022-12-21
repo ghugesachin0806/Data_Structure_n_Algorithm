@@ -117,11 +117,18 @@ public:
                 cout << temp->data << " ";
                 temp = temp->next;
             }
+            cout << endl;
         }
         else
         {
             cout << "stack is empty !" << endl;
         }
+    }
+
+    // stack deletion
+    void delete_stack()
+    {
+        delete top;
     }
 };
 
@@ -141,7 +148,24 @@ int main()
     cout << "top element : " << st.top_ele() << endl;
     cout << "size of stack : " << st.size() << endl;
 
+    // display all the elements from stack
     st.display();
+
+    // memory free
+    st.delete_stack();
 
     return 0;
 }
+
+// top element : 78
+// size of stack : 3
+
+// Memory is free for 78
+
+// top element : 18
+// size of stack : 2
+
+// stack elements are : 18 8 
+
+// Memory is free for 8
+// Memory is free for 18
