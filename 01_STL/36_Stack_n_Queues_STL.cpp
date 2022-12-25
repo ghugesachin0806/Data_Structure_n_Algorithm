@@ -27,11 +27,15 @@ int main()
     str.push("aman");
     str.push("chaman");
 
+    cout << "last element of queue : " << str.back() << endl;
+
     while (!str.empty())
     {
         cout << str.front() << " ";
         str.pop();
     }
 }
+
 // 23 10 45 78 90
+// last element of queue : chaman
 // sachin rohan aniket raghav aman chaman
