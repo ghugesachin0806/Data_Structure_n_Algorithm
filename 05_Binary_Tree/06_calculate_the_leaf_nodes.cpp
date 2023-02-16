@@ -25,32 +25,30 @@ template <typename T>
 
 ***********************************************************/
 
-
-
-int inorder(BinaryTreeNode<int> *root,int cnt)
+int inorder(BinaryTreeNode<int> *root, int cnt)
 {
-    if(root==NULL)
+    if (root == NULL)
     {
         return cnt;
     }
 
-    cnt = inorder(root->left,  cnt);
+    cnt = inorder(root->left, cnt);
     cnt = inorder(root->right, cnt);
 
-    if(root->left==NULL && root->right==NULL)
+    if (root->left == NULL && root->right == NULL)
     {
-        return cnt+1;
+        return cnt + 1;
     }
 
     return cnt;
 }
 
-
-int noOfLeafNodes(BinaryTreeNode<int> *root){
+int noOfLeafNodes(BinaryTreeNode<int> *root)
+{
     // Write your code here.
 
-    int cnt=0;
-    cnt= inorder(root, cnt);
+    int cnt = 0;
+    cnt = inorder(root, cnt);
 
     return cnt;
 };
