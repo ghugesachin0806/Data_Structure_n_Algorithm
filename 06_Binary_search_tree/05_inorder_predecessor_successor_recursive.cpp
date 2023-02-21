@@ -19,7 +19,6 @@ void predecessor(Node *root, Node *&pre, int key)
         pre = root;
         predecessor(root->right, pre, key);
     }
-
     else
     {
         predecessor(root->left, pre, key);
