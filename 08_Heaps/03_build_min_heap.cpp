@@ -24,7 +24,7 @@ vector<int> buildMinHeap(vector<int> &arr)
 {
     // Write your code here
     int size = arr.size();
-    for (int i = (size - 1 / 2); i >= 0; i--)
+    for (int i = (size / 2) - 1; i >= 0; i--)
         heapify(arr, i);
 
     return arr;

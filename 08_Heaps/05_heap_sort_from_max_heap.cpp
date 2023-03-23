@@ -32,7 +32,7 @@ public:
     {
         // Your Code Here
 
-        for (int i = (n - 1) / 2; i >= 0; i--)
+        for (int i = n / 2 - 1; i >= 0; i--)
         {
             heapify(arr, n, i);
         }

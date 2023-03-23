@@ -1,4 +1,5 @@
-// https://practice.geeksforgeeks.org/problems/convert-min-heap-to-max-heap-1666385109/1?page=1&sortBy=newest&query=page1sortBynewest
+// https://practice.geeksforgeeks.org/problems/merge-two-binary-max-heap0144/1
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -22,11 +23,25 @@ public:
             heapify(vect, large);
         }
     }
-    void convertMinToMaxHeap(vector<int> &arr, int N)
+    vector<int> mergeHeaps(vector<int> &a, vector<int> &b, int n, int m)
     {
-        for (int i = (arr.size()) / 2 - 1; i >= 0; i--)
+        // your code here
+        vector<int> vect;
+
+        for (auto i : a)
         {
-            heapify(arr, i);
+            vect.push_back(i);
         }
+        for (auto i : b)
+        {
+            vect.push_back(i);
+        }
+
+        for (int i = vect.size() / 2 - 1; i >= 0; i--)
+        {
+            heapify(vect, i);
+        }
+
+        return vect;
     }
 };
