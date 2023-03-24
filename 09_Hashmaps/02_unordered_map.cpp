@@ -7,9 +7,9 @@ int main()
     // It is formed by combination of  Key-value pair and hashed/mapped value.
     // In unordered map order of key is not preserved ,it is stored in random order of key_value.
 
-     ///////////////////////////////// Time complexity of map //////////////////////////////////////////////////////
-    // 1. Insert() --> O(1)
-    // 2. find/search/update --> O(1)
+    ///////////////////////////////// Time complexity of map //////////////////////////////////////////////////////
+    // 1. Insert() --> O(1), O(N) worst case
+    // 2. find/search/update --> O(1), O(N) worst case
     // 3. erase() --> O(1)
     // 4. count() --> O(1)
     // 5. size()/empty() --> O(1)
