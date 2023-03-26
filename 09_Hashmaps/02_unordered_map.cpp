@@ -5,7 +5,7 @@ int main()
 {
     // It is implemented using hashing.
     // It is formed by combination of  Key-value pair and hashed/mapped value.
-    // In unordered map order of key is not preserved ,it is stored in random order of key_value.
+    // In unordered map, order of key is not preserved ,it is stored by combination of  Key-value pair and hashed/mapped value.
 
     ///////////////////////////////// Time complexity of map //////////////////////////////////////////////////////
     // 1. Insert() --> O(1), O(N) worst case
