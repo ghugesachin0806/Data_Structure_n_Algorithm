@@ -3,39 +3,40 @@ using namespace std;
 
 // assumption that all words in capital letters
 
-class Node
+class Trie
 {
 public:
     char data;
-    Node *children[26];
+    Trie *root;
+    Trie *children[26];
     bool isTerminal;
 
-    Node(char data)
+    Trie()
     {
-        this->data = data;
+        this->data = '\0';
         this->isTerminal = false;
+        this->root = this;
 
         for (int i = 0; i < 26; i++)
         {
             this->children[i] = NULL;
         }
     }
-};
 
-class Trie
-{
-public:
-    Node *root;
-
-    // constructor
-    Trie()
+    Trie(char data)
     {
-        // NULL character assigned for root node
-        root = new Node('\0');
+        this->data = data;
+        this->isTerminal = false;
+        this->root = this;
+
+        for (int i = 0; i < 26; i++)
+        {
+            this->children[i] = NULL;
+        }
     }
 
     /////////////////////////////////////// Insertion ///////////////////////////////////////////////////
-    void insertUtil(Node *root, string word)
+    void insertUtil(Trie *root, string word)
     {
         if (word.size() == 0)
         {
@@ -44,7 +45,7 @@ public:
         }
 
         int index = word[0] - 'A';
-        Node *child;
+        Trie *child;
 
         // Present
         if (root->children[index] != NULL)
@@ -54,7 +55,7 @@ public:
         // Absent
         else
         {
-            child = new Node(word[0]);
+            child = new Trie(word[0]);
             root->children[index] = child;
         }
 
@@ -70,7 +71,7 @@ public:
 
     //////////////////////////////////////// Search /////////////////////////////////////////////////////
 
-    bool searchUtil(Node *root, string word)
+    bool searchUtil(Trie *root, string word)
     {
         if (word.size() == 0)
         {
@@ -96,7 +97,7 @@ public:
 
     ////////////////////////////////////////////// Remove ////////////////////////////////////////////////
 
-    void removeUtil(Node *&root, string word)
+    void removeUtil(Trie *&root, string word)
     {
         if (word.size() != 0)
         {
@@ -150,9 +151,11 @@ int main()
     cout << t->search("TIME") << endl;
     cout << t->search("TIM") << endl;
 
-    //////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
 
     t->insert("TIME");
+    t->insert("TIM");
+
     cout << t->search("TIME") << endl;
     cout << t->search("TIM") << endl;
 
