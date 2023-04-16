@@ -16,15 +16,22 @@ private:
             if (safe[adj[node][i]] == 1)
                 continue;
             else if (safe[adj[node][i]] == -1 || path[adj[node][i]] == 1)
+            {
+                safe[node] = -1;
                 return false;
+            }
             else if (!visited[adj[node][i]])
             {
                 bool b1 = DFS(adj, path, safe, visited, adj[node][i]);
                 if (!b1)
+                {
+                    safe[node] = -1;
                     return false;
+                }
             }
         }
         path[node] = 0;
+        safe[node] = 1;
         return true;
     }
 
@@ -33,31 +40,14 @@ public:
     {
         // code here
         vector<int> safe(V, 0);
+        vector<int> visited(V, 0);
 
         for (int i = 0; i < V; i++)
         {
-            if (safe[i] == 0)
+            if (safe[i] == 0 && visited[i] == 0)
             {
-                vector<int> visited(V, 0);
                 vector<int> path(V, 0);
-
-                bool b1 = DFS(adj, path, safe, visited, i);
-                if (b1)
-                {
-                    for (int i = 0; i < V; i++)
-                    {
-                        if (visited[i] == 1)
-                            safe[i] = 1;
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < V; i++)
-                    {
-                        if (path[i] == 1)
-                            safe[i] = -1;
-                    }
-                }
+                DFS(adj, path, safe, visited, i);
             }
         }
 
