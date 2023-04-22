@@ -1,4 +1,4 @@
-// https://www.codingninjas.com/codestudio/problems/prim-s-mst_1095633
+// https://practice.geeksforgeeks.org/problems/minimum-spanning-tree/1
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -53,40 +53,44 @@ public:
     }
 };
 
-vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pair<int, int>, int>> &g)
+class Solution
 {
-
-    // order edges by ascending weights with u->v
-    // pair<wt,pair<u,v>>
-    priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> qt;
-
-    for (auto it : g)
+public:
+    // Function to find sum of weights of edges of the Minimum Spanning Tree.
+    int spanningTree(int V, vector<vector<int>> adj[])
     {
-        qt.push(make_pair(it.second, make_pair(it.first.first, it.first.second)));
-        qt.push(make_pair(it.second, make_pair(it.first.second, it.first.first)));
-    }
+        // code here
+        int sum = 0;
+        priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> qt;
 
-    int sum = 0;
-
-    // pair<pair<u,v>,wt>
-    vector<pair<pair<int, int>, int>> ans;
-
-    Disjoint *ds = new Disjoint(n);
-
-    while (!qt.empty())
-    {
-        int u = qt.top().second.first;
-        int v = qt.top().second.second;
-        int wt = qt.top().first;
-        qt.pop();
-
-        if (ds->find_ultimate_parent(u) != ds->find_ultimate_parent(v))
+        for (int i = 0; i < V; i++)
         {
-            sum = sum + wt;
-            ans.push_back(make_pair(make_pair(u, v), wt));
-            ds->Union_by_Size(u, v);
-        }
-    }
+            for (auto it : adj[i])
+            {
+                int node = i;
+                int next_node = it[0];
+                int wt = it[1];
 
-    return ans;
-}
+                qt.push(make_pair(wt, make_pair(node, next_node)));
+            }
+        }
+
+        Disjoint *ds = new Disjoint(V);
+
+        while (!qt.empty())
+        {
+            int node = qt.top().second.first;
+            int next_node = qt.top().second.second;
+            int wt = qt.top().first;
+            qt.pop();
+
+            if (ds->find_ultimate_parent(node) != ds->find_ultimate_parent(next_node))
+            {
+                sum = sum + wt;
+                ds->Union_by_Size(node, next_node);
+            }
+        }
+
+        return sum;
+    }
+};
