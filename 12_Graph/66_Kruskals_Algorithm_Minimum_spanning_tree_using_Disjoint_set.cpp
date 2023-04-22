@@ -1,3 +1,4 @@
+// https://www.codingninjas.com/codestudio/problems/prim-s-mst_1095633
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -52,50 +53,40 @@ public:
     }
 };
 
-int main()
+vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pair<int, int>, int>> &g)
 {
-    Disjoint *ds = new Disjoint(7);
 
-    // connecting edges
-    ds->Union_by_Size(1, 2);
-    ds->Union_by_Size(2, 3);
-    ds->Union_by_Size(4, 5);
-    ds->Union_by_Size(6, 7);
+    // order edges by ascending weights with u->v
+    // pair<wt,pair<u,v>>
+    priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> qt;
 
-    if (ds->find_ultimate_parent(5) == ds->find_ultimate_parent(6))
-        cout << "connected" << endl;
-    else
-        cout << "Not-connected" << endl;
+    for (auto it : g)
+    {
+        qt.push(make_pair(it.second, make_pair(it.first.first, it.first.second)));
+        qt.push(make_pair(it.second, make_pair(it.first.second, it.first.first)));
+    }
 
-    ds->Union_by_Size(5, 6);
+    int sum = 0;
 
-    if (ds->find_ultimate_parent(6) == ds->find_ultimate_parent(3))
-        cout << "connected" << endl;
-    else
-        cout << "Not-connected" << endl;
+    // pair<pair<u,v>,wt>
+    vector<pair<pair<int, int>, int>> ans;
 
-    ds->Union_by_Size(4, 2);
+    Disjoint *ds = new Disjoint(n);
 
-    if (ds->find_ultimate_parent(6) == ds->find_ultimate_parent(3))
-        cout << "connected" << endl;
-    else
-        cout << "Not-connected" << endl;
+    while (!qt.empty())
+    {
+        int u = qt.top().second.first;
+        int v = qt.top().second.second;
+        int wt = qt.top().first;
+        qt.pop();
 
-    if (ds->find_ultimate_parent(1) == ds->find_ultimate_parent(7))
-        cout << "connected" << endl;
-    else
-        cout << "Not-connected" << endl;
+        if (ds->find_ultimate_parent(u) != ds->find_ultimate_parent(v))
+        {
+            sum = sum + wt;
+            ans.push_back(make_pair(make_pair(u, v), wt));
+            ds->Union_by_Size(u, v);
+        }
+    }
 
-    if (ds->find_ultimate_parent(0) == ds->find_ultimate_parent(7))
-        cout << "connected" << endl;
-    else
-        cout << "Not-connected" << endl;
-
-    return 0;
+    return ans;
 }
-
-// Not-connected
-// Not-connected
-// connected
-// connected
-// Not-connected
