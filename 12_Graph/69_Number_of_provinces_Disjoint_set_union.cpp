@@ -38,6 +38,9 @@ public:
         int ulp_u = find_ultimate_parent(u);
         int ulp_v = find_ultimate_parent(v);
 
+        if (ulp_u == ulp_v)
+            return;
+
         if (size[ulp_u] > size[ulp_v])
         {
             parent[ulp_v] = ulp_u;
