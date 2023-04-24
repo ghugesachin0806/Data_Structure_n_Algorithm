@@ -36,7 +36,7 @@ public:
             else
             {
                 // update low from already visited node
-                low[node] = min(low[node], low[it]);
+                low[node] = min(low[node], disc[it]);
             }
         }
     }
