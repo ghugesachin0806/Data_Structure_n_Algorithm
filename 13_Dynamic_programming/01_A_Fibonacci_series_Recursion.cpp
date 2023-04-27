@@ -1,5 +1,7 @@
 // https://leetcode.com/problems/fibonacci-number/
 
+//  space complexity of recursive algorithm is proportinal to maximum depth of recursion tree generated.
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -24,3 +26,6 @@ public:
         return solve(n);
     }
 };
+
+// Time complexity ---> O(2^N)
+// Space complexity ---> O(N)

@@ -34,5 +34,5 @@ public:
     }
 };
 
-// Time complexity ---> O(N)
+// Time complexity ---> O(N)+O(N)
 // Space complexity ---> O(N)
