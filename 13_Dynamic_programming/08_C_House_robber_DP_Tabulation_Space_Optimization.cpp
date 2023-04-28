@@ -16,10 +16,10 @@ public:
 
         for (int i = 2; i < nums.size(); i++)
         {
-            // Exclusive call
+            // Exclude call
             int excl = prev2 + 0;
 
-            // Inclusive call
+            // Include call
             int incl = prev1 + nums[i];
 
             int curr = max(excl, incl);
