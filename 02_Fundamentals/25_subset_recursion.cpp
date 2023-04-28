@@ -5,63 +5,34 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void subset(vector<vector<int>> &ans, vector<int> output, vector<int> num, int index)
+class Solution
 {
-    // Base case
-    if (index >= num.size())
+public:
+    void solve(int index, vector<int> &nums, vector<vector<int>> &ans, vector<int> temp)
     {
-        ans.push_back(output);
-        return;
-    }
-
-    // exclude
-    subset(ans, output, num, index + 1);
-
-    // include
-    int free = num[index];
-    output.push_back(free);
-
-    subset(ans, output, num, index + 1);
-}
-
-vector<vector<int>> solve(vector<int> &num)
-{
-    vector<vector<int>> ans;
-    vector<int> output;
-    int index = 0;
-
-    subset(ans, output, num, index);
-    return ans;
-}
-
-int main()
-{
-    int n;
-    cin >> n;
-    vector<int> vect;
-    for (int i = 0; i < n; i++)
-    {
-        int m;
-        cin >> m;
-        vect.push_back(m);
-    }
-    vector<vector<int>> ans;
-
-    ans = solve(vect);
-
-    cout << "{ ";
-    for (int i = 0; i < ans.size(); i++)
-    {
-        cout << "[ ";
-        for (int j = 0; j < ans[i].size(); j++)
+        if (index >= nums.size())
         {
-            cout << ans[i][j] << ",";
+            ans.push_back(temp);
+            return;
         }
-        cout << " ],";
-    }
-    cout << " }";
-}
 
-// -> 3
-// -> 1 2 3
-// { [  ],[ 3, ],[ 2, ],[ 2,3, ],[ 1, ],[ 1,3, ],[ 1,2, ],[ 1,2,3, ], }
+        // Exclude call
+        solve(index + 1, nums, ans, temp);
+
+        // Include call
+        temp.push_back(nums[index]);
+        solve(index + 1, nums, ans, temp);
+        
+    }
+    vector<vector<int>> subsets(vector<int> &nums)
+    {
+        int index = 0;
+
+        vector<int> temp;
+        vector<vector<int>> ans;
+
+        solve(index, nums, ans, temp);
+
+        return ans;
+    }
+};
