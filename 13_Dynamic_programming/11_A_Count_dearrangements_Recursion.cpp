@@ -5,7 +5,7 @@ using namespace std;
 
 #define MOD 1000000007
 
-// Below question have relation as follow
+// Given type of questions have relation as follow
 //  F(n) = (n-1) * {F(n-1)+F(n-2)}
 long long int solve(int n)
 {
