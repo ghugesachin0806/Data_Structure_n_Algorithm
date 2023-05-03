@@ -9,16 +9,9 @@ bool solve(int index, int sum, vector<int> &arr, vector<vector<int>> &dp)
 {
     if (sum == 0)
         return true;
-    if (sum < 0)
+
+    if (sum < 0 || index < 0)
         return false;
-    if (index == 0)
-    {
-        // return (arr[index]==sum);
-        if (arr[index] == sum)
-            return true;
-        else
-            return false;
-    }
 
     if (dp[index][sum] != -1)
         return dp[index][sum];
