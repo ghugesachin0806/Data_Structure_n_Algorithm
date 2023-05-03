@@ -1,0 +1,33 @@
+// https://www.codingninjas.com/codestudio/problems/number-of-subsets_3952532
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int findWays(vector<int> &nums, int target)
+{
+    // code here
+    vector<vector<int>> dp(nums.size(), vector<int>(target + 1, 0));
+
+    for (int i = 0; i < nums.size(); i++)
+        dp[i][0] = 1;
+
+    if (nums[0] <= target)
+        dp[0][nums[0]] = 1;
+
+    for (int i = 1; i < nums.size(); i++)
+    {
+        for (int del = 0; del <= target; del++)
+        {
+            // Exclude call
+            int incl = dp[i - 1][del];
+
+            // Include call
+            int excl = 0;
+            if (del - nums[i] >= 0)
+                excl = dp[i - 1][del - nums[i]];
+
+            dp[i][del] = incl + excl;
+        }
+    }
+    return dp[nums.size() - 1][target];
+}
