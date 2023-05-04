@@ -1,5 +1,12 @@
 // https://www.codingninjas.com/codestudio/problems/number-of-subsets_3952532
 
+// ################### answer is corect ###########################
+
+// It only works for all the nums[i]>0
+// but it is not working  for {0,0,0,1} and target = 1 ,
+// we are traversing from back to start. so zeros are not get included in that.
+
+
 #include <bits/stdc++.h>
 using namespace std;
 

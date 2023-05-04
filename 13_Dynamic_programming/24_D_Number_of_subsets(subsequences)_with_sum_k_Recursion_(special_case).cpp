@@ -1,5 +1,7 @@
 // https://www.codingninjas.com/codestudio/problems/number-of-subsets_3952532
 
+// Here it is also work for {0,0,0,1} and target 1
+
 #include <bits/stdc++.h>
 using namespace std;
 
