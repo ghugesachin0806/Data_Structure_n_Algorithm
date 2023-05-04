@@ -5,25 +5,23 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int solve(int index, int target, vector<int> &num)
+int solve(int index, int target, vector<int> &arr)
 {
-    if (index == 0)
+    if (index < 0)
     {
-        if (target == 0 && num[index] == 0)
-            return 2;
-        if (target == 0 || target == num[index])
+        if (target == 0)
             return 1;
         else
             return 0;
     }
 
-    // Exclude call
-    int excl = solve(index - 1, target, num);
-
     // Include call
     int incl = 0;
-    if (target - num[index] >= 0)
-        incl = solve(index - 1, target - num[index], num);
+    if (target - arr[index] >= 0)
+        incl = solve(index - 1, target - arr[index], arr);
+
+    // Exclude call
+    int excl = solve(index - 1, target, arr);
 
     return incl + excl;
 }

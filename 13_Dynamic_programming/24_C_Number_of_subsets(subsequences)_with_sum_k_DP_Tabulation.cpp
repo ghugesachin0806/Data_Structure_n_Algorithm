@@ -6,7 +6,6 @@
 // but it is not working  for {0,0,0,1} and target = 1 ,
 // we are traversing from back to start. so zeros are not get included in that.
 
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -26,12 +25,12 @@ int findWays(vector<int> &nums, int target)
         for (int del = 0; del <= target; del++)
         {
             // Exclude call
-            int incl = dp[i - 1][del];
+            int excl = dp[i - 1][del];
 
             // Include call
-            int excl = 0;
+            int incl = 0;
             if (del - nums[i] >= 0)
-                excl = dp[i - 1][del - nums[i]];
+                incl = dp[i - 1][del - nums[i]];
 
             dp[i][del] = incl + excl;
         }
