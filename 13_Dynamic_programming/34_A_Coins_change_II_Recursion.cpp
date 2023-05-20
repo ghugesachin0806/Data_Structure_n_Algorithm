@@ -16,7 +16,6 @@ public:
                 return 0;
         }
 
-
         // Include current index
         int temp1 = 0;
         if (amount >= coins[index])
