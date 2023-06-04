@@ -1,5 +1,9 @@
 // Set data structure using bit masking
 
+// Bit_masking only be used if array or vector have size less than or equal to 64
+// Bit_masking is used in range of(0,63) for long long
+// Bit_masking is used in range of(0,31) for int
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -47,7 +51,7 @@ public:
 int main()
 {
     set_bit st;
-    st.add(5);
+    st.add(56);
     st.add(7);
     st.add(11);
     st.add(13);
@@ -59,8 +63,9 @@ int main()
     st.remove(50);
     st.remove(48); // removing not present element.
     st.add(32);
+    st.add(53);
     st.print(); // printing the elements
 }
 
-// 5 7 11 13 50
-// 5 11 13 32
+// 7 11 13 50 56
+// 11 13 32 53 56
