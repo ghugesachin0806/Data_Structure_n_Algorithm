@@ -21,7 +21,7 @@ public:
 
         while (1)
         {
-            if (temp & 1 == 1)
+            if ((temp & 1) == 1)
                 break;
 
             temp = temp >> 1;

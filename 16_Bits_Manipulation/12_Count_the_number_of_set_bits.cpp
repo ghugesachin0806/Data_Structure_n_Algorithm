@@ -26,7 +26,7 @@ public:
         while (N != 0)
         {
             cnt++;
-            N = N & (N - 1);
+            N = (N & (N - 1));
         }
 
         return cnt;
