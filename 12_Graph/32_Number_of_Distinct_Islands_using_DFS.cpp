@@ -13,6 +13,7 @@ public:
         int row = grid.size();
         int col = grid[0].size();
         visited[node_row][node_col] = 1;
+        vect.push_back(make_pair(node_row - base_row, node_col - base_col));
 
         int del_row[] = {0, 0, +1, -1};
         int del_col[] = {-1, +1, 0, 0};
@@ -24,7 +25,6 @@ public:
 
             if (temp_row < row && temp_col < col && temp_row >= 0 && temp_col >= 0 && grid[temp_row][temp_col] == 1 && visited[temp_row][temp_col] == 0)
             {
-                vect.push_back(make_pair(temp_row - base_row, temp_col - base_col));
                 DFS(grid, visited, vect, temp_row, temp_col, base_row, base_col);
             }
         }
