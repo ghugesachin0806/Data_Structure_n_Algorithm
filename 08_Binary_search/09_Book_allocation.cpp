@@ -6,59 +6,53 @@ class Solution
 {
 public:
     // Function to find minimum number of pages.
-    bool solve(int vect[], int n, int m, int start, int end, int mid)
+    bool soln(int mid, int M, int N, int A[])
     {
-        int bookPage = 0;
-        int student = 1;
-
-        for (int i = 0; i < n; i++)
+        int temp = 0;
+        int cnt = 1;
+        for (int i = 0; i < N; i++)
         {
-            if (bookPage + vect[i] <= mid)
+            if (temp + A[i] <= mid)
             {
-                bookPage += vect[i];
+                temp += A[i];
             }
             else
             {
-                student++;
-
-                if (vect[i] > mid)
+                cnt++;
+                if (cnt > M || A[i] > mid)
                     return false;
 
-                bookPage = 0;
-                i--;
+                temp = A[i];
             }
         }
 
-        if (student > m)
-            return false;
-
-        else
-            return true;
+        return true;
     }
-
     int findPages(int A[], int N, int M)
     {
-        if (N < M)
+        // code here
+        if (M > N)
             return -1;
 
-        int start = 0;
-        int end = 0;
-        for (int i = 0; i < N; i++)
-            end += A[i];
+        int sum = 0;
 
-        while (start < end)
+        for (int i = 0; i < N; i++)
+        {
+            sum += A[i];
+        }
+
+        int start = 0;
+        int end = sum;
+
+        while (start <= end)
         {
             int mid = start + (end - start) / 2;
 
-            if (solve(A, N, M, start, end, mid))
-            {
-                end = mid;
-            }
+            if (soln(mid, M, N, A))
+                end = mid - 1;
             else
-            {
                 start = mid + 1;
-            }
         }
-        return end;
+        return start;
     }
 };
