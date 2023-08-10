@@ -63,6 +63,8 @@ int main()
 
     // Callin g heapify function
     int size = h.vect.size() - 2;
+    // In complete binary tree, there is no need to process (n/2+ 1) to (n) nodes , they are
+    // leaf nodes and they are already in there correct position.(1-based indexed)
     for (int i = (size / 2); i > 0; i--)
     {
         h.heapify(i);
