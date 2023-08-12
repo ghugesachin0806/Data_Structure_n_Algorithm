@@ -6,30 +6,37 @@ using namespace std;
 class Solution
 {
 public:
-    int find(int i, vector<vector<int>> &job, vector<int> &startTime, int n, vector<int> &dp)
+    int soln(int index, vector<int> &startTime, vector<int> &dp, vector<vector<int>> &vect)
     {
-        if (i >= n)
+        if (index == startTime.size())
             return 0;
-        if (dp[i] != -1)
-            return dp[i];
-        int index = lower_bound(startTime.begin(), startTime.end(), job[i][1]) - startTime.begin();
 
-        int pick = job[i][2] + find(index, job, startTime, n, dp);
-        int notpick = find(i + 1, job, startTime, n, dp);
+        if (dp[index] != -1)
+            return dp[index];
 
-        return dp[i] = max(pick, notpick);
+        // non-pick current index
+        int excl = soln(index + 1, startTime, dp, vect);
+
+        // pick current index
+        int newindex = lower_bound(startTime.begin(), startTime.end(), vect[index][1]) - startTime.begin();
+        int incl = soln(newindex, startTime, dp, vect) + vect[index][2];
+
+        return dp[index] = max(excl, incl);
     }
     int jobScheduling(vector<int> &startTime, vector<int> &endTime, vector<int> &profit)
     {
-        int n = startTime.size();
-        vector<vector<int>> job;
-        vector<int> dp(n, -1);
-        for (int i = 0; i < n; i++)
+
+        vector<vector<int>> vect;
+
+        vector<int> dp(startTime.size(), -1);
+        for (int i = 0; i < startTime.size(); i++)
         {
-            job.push_back({startTime[i], endTime[i], profit[i]});
+            vect.push_back({startTime[i], endTime[i], profit[i]});
         }
-        sort(job.begin(), job.end());
+
+        sort(vect.begin(), vect.end());
         sort(startTime.begin(), startTime.end());
-        return find(0, job, startTime, n, dp);
+
+        return soln(0, startTime, dp, vect);
     }
 };
